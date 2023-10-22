@@ -3,10 +3,21 @@ from bs4 import BeautifulSoup
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+import yaml
+import os
 
-MY_EMAIL = "Lindablad12345@gmail.com"
-PASSWORD = "efalvoewcjfxezrm"
-SENDING_MAIL = "twan.dekorte@gmail.com"
+def read_yaml(yaml_path):
+    print(os.path.exists(yaml_path))
+    with open(yaml_path, 'r',encoding='utf-8') as f:
+        yaml_content = yaml.safe_load(f)
+    return yaml_content
+
+config_path = "configs/config.yaml"
+configs = read_yaml(config_path)
+
+MY_EMAIL = configs["MY_EMAIL]"
+PASSWORD = configs["PASSWORD]"
+SENDING_MAIL = configs["SENDING_MAIL]"
 
 #get HTML page in bs4 for extraction
 URL = "https://www.amazon.nl/K3-Mechanisch-Toetsenbord-Ultra-Compact-TPU-veerkabel/dp/B0B9M6477S/ref=sr_1_17?crid=XNMJVDZUE4B9&keywords=toetsenbord&qid=1697904930&refinements=p_n_free_shipping_eligible%3A17033278031%2Cp_72%3A4993218031%2Cp_36%3A20314670031&rnid=16332312031&s=videogames&sprefix=toetsenbor%2Cvideogames%2C69&sr=1-17&th=1"
